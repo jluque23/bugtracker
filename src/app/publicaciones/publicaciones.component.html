@@ -1,0 +1,44 @@
+<div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">{{titulo}}</h1>
+
+        <!-- Blog Post -->
+        <div class="card mb-4" *ngFor="let publicacion of publicaciones">
+          <img class="card-img-top" src='{{publicacion.foto}}' alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{publicacion.titulo}}</h2>
+            <p class="card-text">{{publicacion.sinopsis}}</p>
+            <button [routerLink]="['/publicaciones/detalle/', publicacion.id]" class="btn btn-primary">Publicacion</button>            
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{publicacion.createAt}} By: 
+            <a href="#">{{publicacion.autor.nombre}}</a>
+          </div>
+        </div>
+
+        <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+    </div>    
+
+          <!-- Sidebar Widgets Column -->
+          <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Crear</h5>
+              <div class="card-body">
+                <div class="input-group">
+
+                    <button [routerLink]="['/publicaciones/crearpublicacion']" class="btn btn-success btn-block" type="button">Crear Nueva Publicacion</button>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+</div>
+

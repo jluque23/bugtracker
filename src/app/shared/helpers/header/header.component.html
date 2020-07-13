@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  
+    <a class="navbar-brand" href="#">Jesus Luque</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="dropdown" routerLinkActive="active">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuAboutMe" role="button">¿Quien soy?</a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuAboutMe">
+            <button [routerLink]='["/quiensoy"]' class="dropdown-item">Acerca de mi</button>
+            <button [routerLink]='["/experiencia"]' class="dropdown-item">Experiencia</button>
+            <button [routerLink]='["/estapagina"]' class="dropdown-item">Acerca de esta pagina</button>
+          </div>
+
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/clientes">Clientes</a>
+        </li> 
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/productos">Productos</a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/publicaciones">Publicaciones</a>
+        </li>
+      </ul>
+      
+      <ul class="navbar-nav navbar-right">
+        <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">Sign in</a></li>
+
+        <li *ngIf="authService.isAuthenticated()" class="dropdown">
+          <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{this.authService.usuario.username}}
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <button [routerLink]="['/settings']" class="dropdown-item" type="submit">Settings</button>
+            <button (click)='logout()' class="dropdown-item" type="submit">Sign out</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>

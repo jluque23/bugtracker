@@ -1,0 +1,40 @@
+<div class="card bg-dark text-white container col-8">
+    
+    <div class="card-header">{{ titulo }}</div>
+
+    <div class="card-body">
+        <form #signupForm="ngForm">
+
+            <div class="form-group">
+                <label for="nombre">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre" required minlength="4" #nombre="ngModel" placeholder="Type your name">
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Last name</label>
+                <input type="text" class="form-control" [(ngModel)]="usuario.apellido" name="apellido" required minlength="4" #apellido="ngModel" placeholder="Type your lastname">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" required minlength="4" #email="ngModel" placeholder="email@hotmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username" autofocus required minLength="4" #username="ngModel" placeholder="Type your username here">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password" required minlength="4" #password="ngModel" placeholder="Type your password">
+            </div>
+    
+            <div class="text-center">
+                <button type="submit" class="btn btn-secondary col-5" (click)='signUp()' role="button" [disabled]="!signupForm.form.valid" >Submit</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+

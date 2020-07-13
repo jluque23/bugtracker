@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <h1 class="mt-4">Account</h1>
+  <form #accountForm="ngForm">
+
+    <div class="form-group">
+        <label for="nombre">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre" #nombre="ngModel" autofocus required minlength="4">
+    </div>
+
+    <div class="form-group">
+        <label for="apellido">Last name</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.apellido" name="apellido" required minlength="4" #apellido="ngModel">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" [(ngModel)]="usuario.email" name="email" required minlength="4" #email="ngModel">
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username" required minLength="4" #username="ngModel">
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary col-5" (click)="updateAccount()" role="button">Submit</button>
+    </div>
+
+    <!-- <hr>
+    
+     <div class="form-group">
+        <label for="password">Change Password</label>
+        <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password" (click)="updateAccount()" required minlength="4" #password="ngModel">
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary col-5" role="button" [disabled]="!accountForm.form.valid" >Submit</button>
+    </div>
+     --> 
+  </form>
+</div>

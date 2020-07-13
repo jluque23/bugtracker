@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <h1 class="mt-4">Profile</h1>
+    <form #profileForm="ngForm">
+      <div class="form-group">
+        <label for="apellido">Job Title</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.jobTitle" #jobTitle="ngModel" name="jobTitle" required minlength="4">
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Department</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.department" #department="ngModel" name="department" required minlength="4">
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Job Labours</label>
+        <input type="text" class="form-control" [(ngModel)]="usuario.jobLabour" #jobLabour="ngModel" name="jobLabour" required minlength="4">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary col-5" role="button" (click)="updateAccount()">Submit</button>
+    </div>
+  </form>
+</div>

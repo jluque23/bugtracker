@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Cliente } from '../cliente';
-import { ClienteService } from '../cliente.service';
 import Swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
-import { ModalService } from './modal.service';
-import { AuthService } from 'src/app/usuarios/auth.service';
-import { FacturaService } from 'src/app/facturas/services/factura.service';
-import { Factura } from 'src/app/facturas/models/factura';
+import { Cliente } from 'src/app/shared/models/cliente';
+import { ClienteService } from 'src/app/shared/services/cliente.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
+import { FacturaService } from 'src/app/shared/services/factura.service';
+import { Factura } from 'src/app/shared/models/factura';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'detalle-cliente',
@@ -51,8 +51,7 @@ export class DetalleComponent implements OnInit {
             Swal.fire('La foto se ha subido completamente!', `La foto se ha subido con exito: ${this.cliente.foto}`, 'success');
             this.fotoSeleccionada = null;
           }
-        }
-        );
+        });
     }
   }
 

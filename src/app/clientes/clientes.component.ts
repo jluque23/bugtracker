@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from './cliente';
-import { ClienteService } from './cliente.service';
 import Swal from 'sweetalert2';
-import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { ModalService } from './detalle/modal.service';
-import { AuthService } from '../usuarios/auth.service';
+import { Cliente } from '../shared/models/cliente';
+import { ClienteService } from '../shared/services/cliente.service';
+import { ModalService } from '../shared/services/modal.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-clientes',
@@ -17,7 +16,10 @@ export class ClientesComponent implements OnInit {
   paginador: any;
   clienteSeleccionado: Cliente;
 
-  constructor(private clienteService: ClienteService, private activatedRoute: ActivatedRoute, private modalService: ModalService, public authService: AuthService) { }
+  constructor(private clienteService: ClienteService, 
+              private activatedRoute: ActivatedRoute, 
+              private modalService: ModalService, 
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
