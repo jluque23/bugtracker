@@ -1,0 +1,15 @@
+<h1 style=font-size:50px; class="display-1 mb-3">Unsolved Bugs <i class="fas fa-bug"></i></h1>
+
+<button type="button" class="btn btn-warning mb-3" [routerLink]='["/newbug"]'>Add new <i class="fas fa-plus"></i></button>
+
+<div class="row">
+    <div class="col-xl-4 col-md-6" *ngFor="let bug of bugsActivos">
+        <div class="card border-warning mb-4" style="cursor: pointer;" [routerLink]="['/detallebug/', bug.id]">
+            <h3 class="card-header bg-warning border-warning">#{{bug.id}} {{bug.title}}</h3>
+            <div class="card-body">
+              <p class="card-text">{{bug.descripcion}}</p>
+              <footer class="blockquote-footer">Opened by: {{bug.usuario.nombre}} {{bug.usuario.apellido}}</footer>
+            </div>
+        </div>
+    </div>
+</div>

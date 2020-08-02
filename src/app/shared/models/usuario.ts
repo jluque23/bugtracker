@@ -5,14 +5,6 @@ export class Usuario {
     nombre: string;
     apellido: string;
     email: string;
+    createAt: string;
     roles: string[] = [];
-    jobTitle: string;
-    department: string;
-    jobLabour: string;
-    country: string;
-    addressLine: string;
-    addressLineS: string;
-    city: string;
-    province: string;
-    postalCode: string;
 }

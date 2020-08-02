@@ -1,0 +1,39 @@
+<div class="container-fluid row">
+  <!-- Post Content Column -->
+  <div class="col-lg-10">
+    <!-- Title -->
+    <h1 style=font-size:50px;>{{bug.title}} #{{bug.id}} <button class="btn btn-danger position-absolute ml-3 " (click)="cerrarBug()" *ngIf="this.bug.enabled && this.authService.hasRole('ROLE_ADMIN')">Close Bug</button></h1>
+
+    <!-- Author -->
+    <h5 class="lead" *ngIf="bug.usuario">Opened by: {{bug.usuario.nombre}} {{bug.usuario.apellido}} on {{bug.createAt}}</h5> 
+    
+    <!-- Post Content -->
+    <div class="card mb-4">
+        <div class="card-body" *ngIf="bug.usuario">
+            <h5>{{bug.usuario.nombre}} {{bug.usuario.apellido}} commented:</h5>
+            <h3>{{bug.descripcion}}</h3>
+        </div>
+    </div>
+
+    <!-- Single Comment -->
+    <div class="card mb-4" *ngFor="let bugcomentario of comentarios">
+      <div class="card-body">
+        <h5>{{bugcomentario.usuario}} on: {{bugcomentario.createAt}}</h5>
+        {{bugcomentario.comentario}}
+      </div>
+    </div>
+
+    <!-- Comments Form -->
+    <div class="card my-4" *ngIf="this.bug.enabled">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form #comentarioForm="ngForm">
+            <div class="form-group">
+              <textarea type="text" class="form-control" rows="3" [(ngModel)]="bugComentario.comentario" name="comentario" required minlength="10" #comentario="ngModel" placeholder="Type your comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="newBugComentario()" [disabled]="!comentarioForm.form.valid">Submit</button>
+          </form>
+        </div>
+    </div>
+
+</div>

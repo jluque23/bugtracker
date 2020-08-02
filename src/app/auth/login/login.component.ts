@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  titulo: string = 'Sign In';
+  titulo = 'Sign In';
   usuario: Usuario;
 
   constructor(private authService: AuthService, private router: Router) {
@@ -26,20 +26,21 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.usuario).subscribe(response => {
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
-      let usuario = this.authService.usuario;
+      const usuario = this.authService.usuario;
       this.router.navigate(['/quiensoy']);
       Swal.fire('Login', `Hola ${usuario.username}, has iniciado sesion con exito`, 'success');
+      this.router.navigate(['/dashboard']);
     }, err => {
-      if(err.status==400){
+      if (err.status == 400) {
         Swal.fire('Login', 'Usuario o clave incorrectas!', 'error');
       }
     });
   }
 
   ngOnInit(): void {
-    if(this.authService.isAuthenticated()){
-      Swal.fire('Login',`Hola ${this.authService.usuario.username} ya estas autenticado!`,'info')
-      this.router.navigate(['/quiensoy']);
+    if (this.authService.isAuthenticated()) {
+      Swal.fire('Login', `Hola ${this.authService.usuario.username} ya estas autenticado!`, 'info')
+      this.router.navigate(['/dashboard']);
     }
   }
 

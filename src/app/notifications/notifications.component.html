@@ -1,0 +1,9 @@
+<h1 style=font-size:50px; class="display-1 mb-3">Notifications<i class="far fa-bell ml-1"></i></h1>
+
+<div class="card border-dark">
+    <div class="card-header bg-dark text-white">The notifications are:</div>
+    <ul class="card-body" *ngFor="let notification of notifications">
+        <li>{{notification.description}}</li>
+    </ul>
+</div>
+    

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,17 @@ export class SignupService {
   private urlEndPoint: string = 'http://localhost:8080/api/usuarios';
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  getUsuarios(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map((response: any) => {
+        (response.content as Usuario[]).map(usuario => {
+          return usuario;
+        });
+        return response;
+      })
+    );
+  }
 
   getUsuario(id): Observable<any> {
     return this.http.get<Usuario>(`${this.urlEndPoint}/${id}`);

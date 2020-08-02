@@ -1,49 +1,50 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  
-    <a class="navbar-brand" href="#">Jesus Luque</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+ <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+  <a class="navbar-brand" routerLink='/bugexterminator'><i class="fas fa-bug"></i> Bug ExTerminator</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <li class="dropdown" routerLinkActive="active">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuAboutMe" role="button">¿Quien soy?</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuAboutMe">
-            <button [routerLink]='["/quiensoy"]' class="dropdown-item">Acerca de mi</button>
-            <button [routerLink]='["/experiencia"]' class="dropdown-item">Experiencia</button>
-            <button [routerLink]='["/estapagina"]' class="dropdown-item">Acerca de esta pagina</button>
-          </div>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink='/dashboard' *ngIf="authService.hasRole('ROLE_ADMIN')">Dashboard<i class="fas fa-tachometer-alt ml-1 fa-lg"></i></a>  
+      </li>
 
+
+      <div class="dropdown"  routerLinkActive="active" *ngIf="authService.hasRole('ROLE_USER')">
+        <li class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bug Tracker <i class="fas fa-bug ml-1"></i>
         </li>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" routerLink='/openedbugs'>Unsolved bugs<i class="fas fa-wrench ml-1 fa-lg"></i></a>  
+          <a class="dropdown-item" routerLink='/closedbugs'>Solved bugs<i class="far fa-check-square ml-1 fa-lg"></i></a>  
+        </div>
+      </div>
 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/clientes">Clientes</a>
-        </li> 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/productos">Productos</a>
-        </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink='/notifications' *ngIf="authService.hasRole('ROLE_ADMIN')">Notifications<i class="far fa-bell ml-1 fa-lg"></i></a>  
+      </li>
 
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/publicaciones">Publicaciones</a>
-        </li>
-      </ul>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink='/manageroles' *ngIf="authService.hasRole('ROLE_ADMIN')">Role Manager<i class="fas fa-users ml-1 fa-lg"></i></a>  
+      </li>
       
-      <ul class="navbar-nav navbar-right">
-        <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">Sign in</a></li>
+    </ul>
+    
+    <ul class="navbar-nav navbar-right">
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-light">Sign in</a></li>
 
-        <li *ngIf="authService.isAuthenticated()" class="dropdown">
-          <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{this.authService.usuario.username}}
-          </a>
-        
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <button [routerLink]="['/settings']" class="dropdown-item" type="submit">Settings</button>
-            <button (click)='logout()' class="dropdown-item" type="submit">Sign out</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      <li *ngIf="authService.isAuthenticated()" class="dropdown">
+        <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.authService.usuario.username}}
+        </a>
+      
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <button [routerLink]="['/settings']" class="dropdown-item" type="submit">Settings</button>
+          <button (click)='logout()' class="dropdown-item" type="submit">Sign out</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav> 

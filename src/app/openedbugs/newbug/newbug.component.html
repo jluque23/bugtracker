@@ -1,0 +1,23 @@
+<h1>Create a new bug</h1>
+<button type="button" class="btn btn-danger mb-3" [routerLink]='["/openedbugs"]'>Back</button>
+
+<div class="card">
+    <div class="card-header bg-dark text-white">New Bug</div>
+
+    <div class="card-body">
+        <form #signupForm="ngForm">
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" [(ngModel)]="bug.title" name="title" required minlength="10" #title="ngModel" placeholder="Set a title to the bug">
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Description</label>
+                <textarea type="text" style="height: 100px;" class="form-control" [(ngModel)]="bug.descripcion" name="descripcion" required minlength="4" #descripcion="ngModel" placeholder="Type a description to the bug"></textarea>
+            </div>
+
+            <button class="btn btn-primary" (click)="newBug()">Submit</button>
+        </form>
+    </div>
+</div>

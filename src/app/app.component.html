@@ -1,8 +1,19 @@
-<app-header></app-header>
-<div class="container my-3 pb-5">
+<!-- <mat-sidenav-container>
+  <mat-sidenav class="border-dark bg-light" mode="side" opened #sidenav>
+    <mat-nav-list>
+      <app-header></app-header>
+    
+    </mat-nav-list>
+  </mat-sidenav>
 
-  <router-outlet></router-outlet>
-  
-</div>
-
+  <mat-sidenav-content>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>  
+</mat-sidenav-container> -->
 <!-- <app-footer></app-footer> -->
+
+<app-header class="mb-5"></app-header>
+
+<div class="container-fluid col-lg-11">
+  <router-outlet></router-outlet>
+</div>

@@ -4,18 +4,14 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Your Details </div>
         <div class="list-group list-group-flush">
-          <a class="list-group-item list-group-item-action bg-light" (click)="pagina = 1">Profile</a>
-          <a class="list-group-item list-group-item-action bg-light" (click)="pagina = 2">Account</a>
-          <a class="list-group-item list-group-item-action bg-light" (click)="pagina = 3">Billing</a>
+          <a class="list-group-item list-group-item-action bg-light" (click)="pagina = 1">Account</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-        <app-profile *ngIf="pagina == 1"></app-profile>
-        <app-account *ngIf="pagina == 2"></app-account>
-        <app-billing *ngIf="pagina == 3"></app-billing>
+        <app-account *ngIf="pagina == 1"></app-account>
     </div>
     <!-- /#page-content-wrapper -->
 

@@ -23,6 +23,16 @@ export class AuthService {
     return new Usuario();
   }
 
+  public get usuarioId(): Usuario {
+    if (this._usuario != null) {
+      const usuarioOnlyId = new Usuario();
+      usuarioOnlyId.id = this._usuario.id;
+
+      return usuarioOnlyId;
+    }
+    return new Usuario();
+  }
+
   public get token(): string {
     if (this._token != null) {
       return this._token;
@@ -52,9 +62,10 @@ export class AuthService {
 
   guardarUsuario(accessToken: string): void {
 
-    let payload = this.obtenerDatosToken(accessToken);
+    const payload = this.obtenerDatosToken(accessToken);
 
     this._usuario = new Usuario();
+    this._usuario.id = payload.id;
     this._usuario.nombre = payload.nombre;
     this._usuario.apellido = payload.apellido;
     this._usuario.email = payload.email;
@@ -76,24 +87,24 @@ export class AuthService {
     return null;
   }
 
-  public isAuthenticated():boolean{
-    let payload = this.obtenerDatosToken(this.token);
-    if(payload != null && payload.user_name && payload.user_name.length>0){
+  public isAuthenticated(): boolean {
+    const payload = this.obtenerDatosToken(this.token);
+    if (payload != null && payload.user_name && payload.user_name.length > 0) {
       return true;
     }
     return false;
   }
 
-  hasRole(role:string): boolean{
-    if(this.usuario.roles.includes(role)){
+  hasRole(role: string): boolean {
+    if (this.usuario.roles.includes(role)) {
       return true;
     }
     return false;
   }
 
-  logout():void{
-    this._token=null;
-    this._usuario=null;
+  logout(): void {
+    this._token = null;
+    this._usuario = null;
     sessionStorage.clear();
   }
 
