@@ -43,10 +43,9 @@ const routes: Routes = [
   { path: 'closedbugs', component: ClosedbugsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'} },
   { path: 'manageroles', component: ManagerolesComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'} },
   { path: 'newbug', component: NewbugComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'} },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent},
   { path: 'notifications', component: NotificationsComponent},
-  { path: 'bugexterminator', component: BugexterminatorComponent
-}
+  { path: 'bugexterminator', component: BugexterminatorComponent }
 ];
 
 @NgModule({

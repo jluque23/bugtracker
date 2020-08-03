@@ -70,4 +70,17 @@ export class SignupService {
     );
   }
 
+  makeUserAdmin(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(`${this.urlEndPoint}/makeadmin`, usuario).pipe(
+      catchError(e => {
+        if (e.status == 400) {
+          return throwError(e);
+        }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 }

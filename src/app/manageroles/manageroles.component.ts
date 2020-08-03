@@ -3,7 +3,8 @@ import { ModalService } from '../shared/services/modal.service';
 import { Usuario } from '../shared/models/usuario';
 import { SignupService } from '../shared/services/signup.service';
 import { ActivatedRoute } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import Swal from 'sweetalert2';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-manageroles',
@@ -19,7 +20,10 @@ export class ManagerolesComponent implements OnInit {
   usuariosAdmin = 0;
   usuariosGeneral = 0;
 
-  constructor(private modalService: ModalService, private signupService: SignupService, private activatedRoute: ActivatedRoute) { }
+  constructor(private modalService: ModalService,
+              private signupService: SignupService,
+              private activatedRoute: ActivatedRoute,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -32,6 +36,7 @@ export class ManagerolesComponent implements OnInit {
 
       this.signupService.getUsuarios(page).subscribe(response => {
         this.usuarios = response.content as Usuario[];
+
         this.paginador = response;
         this.usuariosTotal = this.usuarios.length;
 
@@ -40,11 +45,11 @@ export class ManagerolesComponent implements OnInit {
       });
     });
 
-    this.modalService.notificarUpload.subscribe(usuario => {
-      this.usuarios = this.usuarios.map(usuarioOriginal => {
-        return usuarioOriginal;
-      });
-    });
+    // this.modalService.notificarUpload.subscribe(
+    //   this.usuarios = this.usuarios.map(usuarioOriginal => {
+    //     return usuarioOriginal;
+    //   })
+    // );
 
   }
 
@@ -64,5 +69,21 @@ export class ManagerolesComponent implements OnInit {
 
   numeroUsuariosGeneral(){
     this.usuariosGeneral = this.usuariosTotal - this.usuariosAdmin;
+  }
+
+  makeAdmin(usuario: Usuario){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, make this user an admin!'
+    }).then((result) => {
+      if (result.value) {
+        this.abrirModal(usuario);
+      }
+    });
   }
 }

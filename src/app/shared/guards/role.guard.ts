@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
@@ -18,20 +18,20 @@ export class RoleGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-      if(!this.authService.isAuthenticated()){
-        this.router.navigate(['/login']);
-        return false;
-      }
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return false;
+    }
 
-      let role = next.data['role'] as string;
-      
-      if(this.authService.hasRole(role)){
-        return true;
-      }
- 
-      Swal.fire('Acceso denegado',`Hola ${this.authService.usuario.username} no tienes acceso a este recurso!`,'warning');
-      this.router.navigate(['/clientes']);
+    let role = next.data['role'] as string;
+
+    if (this.authService.hasRole(role)) {
+      return true;
+    }
+
+    Swal.fire('Acceso denegado', `Hola ${this.authService.usuario.username} no puedes acceder aqui!`, 'warning');
+    this.router.navigate(['/bugexterminator']);
     return false;
   }
-  
+
 }

@@ -47,7 +47,7 @@
                         <th>Email</th>
                         <th>Date Created</th>
                         <th>Role</th>
-                        <th>Edit Roles</th>
+                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Edit Roles</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,8 +60,8 @@
                         <td>{{usuario.apellido}}</td>
                         <td>{{usuario.email}}</td>
                         <td>{{usuario.createAt}}</td>
-                        <td>{{usuario.roles | json}}</td>
-                        <td><button type="button" (click)="abrirModal(usuario)" class="btn btn-primary btn-sm">Editar</button></td>
+                        <td>{{usuario.roles[0] | json}}</td>
+                        <td><button type="button" (click)="makeAdmin(usuario)" class="btn btn-danger btn-sm" *ngIf="authService.hasRole('ROLE_ADMIN')">Make admin</button></td>
                     </tr>
                 </tbody>
             </table>
