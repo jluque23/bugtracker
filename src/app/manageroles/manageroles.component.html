@@ -1,7 +1,6 @@
 <h1 style=font-size:50px; class="display-1 mb-3">Role Manager Assignment <i class="fas fa-users"></i></h1>
 
 <app-usermodal *ngIf="usuarioSeleccionado" [usuario]="usuarioSeleccionado"></app-usermodal>
-
 <!-- Cards -->
 <div class="row">
     <div class="col-xl-4 col-md-6">
@@ -38,10 +37,16 @@
         </i>
     </div>
     <div class="card-body">
+        
+        <div class="input mb-3">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search User">
+        </div>
+
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
+                        <th *ngIf="authService.hasRole('ROLE_USER')">Imagen</th>
                         <th>Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
@@ -51,11 +56,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of usuarios">
-                        <!-- <td *ngIf="authService.hasRole('ROLE_USER')"><img *ngIf="cliente?.foto" (click)="abrirModal(cliente)" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" class="img-thumbnail rounded"
-                            style="width: 64px; cursor: pointer;">
-                            <img *ngIf="!cliente?.foto" (click)="abrirModal(cliente)" src="http://localhost:8080/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded"
-                            style="width: 64px; cursor: pointer;"></td> -->
+                    <tr *ngFor="let usuario of usuarios | filter:searchText">
+                        <td *ngIf="authService.hasRole('ROLE_USER')"><img *ngIf="usuario?.foto" src="http://localhost:8080/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded"
+                            style="width: 84px;">
+                            <img *ngIf="!usuario?.foto" src="http://localhost:8080/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded"
+                            style="width: 84px;"></td>
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.apellido}}</td>
                         <td>{{usuario.email}}</td>

@@ -9,4 +9,5 @@ export class Bug {
     createAt: string;
     bugComentario: Bugcomentario [] = [];
     enabled: boolean;
+    foto: string;
 }

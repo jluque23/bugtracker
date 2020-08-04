@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { Bug } from '../models/bug';
@@ -50,11 +50,11 @@ export class BugService {
     );
   }
 
-  updateBug(bug: Bug): Observable<any>{
+  updateBug(bug: Bug): Observable<any> {
     return this.http.put<any>(`${this.urlEndPoint}/${bug.id}`, bug).pipe(
-      catchError(e =>{
-        this.router.navigate(['/productos']);
-        if(e.error.mensaje){
+      catchError(e => {
+        this.router.navigate(['/openedbugs']);
+        if (e.error.mensaje) {
           console.error(e.error.mensaje);
         }
         return throwError(e);
@@ -71,5 +71,19 @@ export class BugService {
         return response;
       })
     );
+  }
+
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
+    const formData = new FormData();
+
+    console.log(formData);
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
   }
 }

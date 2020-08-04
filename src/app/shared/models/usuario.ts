@@ -7,4 +7,5 @@ export class Usuario {
     email: string;
     createAt: string;
     roles: string[] = [];
+    foto: string;
 }

@@ -12,6 +12,7 @@
         <div class="card-body" *ngIf="bug.usuario">
             <h5>{{bug.usuario.nombre}} {{bug.usuario.apellido}} commented:</h5>
             <h3>{{bug.descripcion}}</h3>
+            <img *ngIf="bug?.foto" src="http://localhost:8080/api/uploads/img/{{bug.foto}}" class="img-thumbnail rounded" style="width: 100%; height: 500px;">
         </div>
     </div>
 

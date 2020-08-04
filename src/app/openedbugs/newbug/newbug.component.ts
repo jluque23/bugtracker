@@ -4,9 +4,9 @@ import { BugService } from 'src/app/shared/services/bug.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Usuario } from 'src/app/shared/models/usuario';
 import { BugNotification } from 'src/app/shared/models/bugnotification';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-newbug',
@@ -17,6 +17,8 @@ export class NewbugComponent implements OnInit {
 
   public bug: Bug = new Bug();
   public usuarioOriginal = this.authService.usuario;
+  fotoSeleccionada: File;
+  progreso = 0;
 
   constructor(private router: Router,
               public bugService: BugService,
@@ -28,20 +30,59 @@ export class NewbugComponent implements OnInit {
   }
 
   newBug(): void {
-    if (this.bug.usuario == null){
+    if (this.bug.usuario == null) {
       this.bug.usuario = this.authService.usuarioId;
     }
 
-    this.bugService.createBug(this.bug).subscribe(
-      json => {
-        this.router.navigate(['/openedbugs']);
-        Swal.fire('New bug ', `Title: ${json.title}. created succesfully!`, 'success');
-        this.createNotification(this.bug);
-      }
-    );
+    if (this.fotoSeleccionada == null) {
+      Swal.fire('Photo', `You must upload a photo`, 'warning');
+    } else {
+      this.bugService.createBug(this.bug).subscribe(
+        json => {
+          this.createNotification(this.bug);
+          this.subirFoto(json.id);
+        }
+      );
+    }
   }
 
-  createNotification(bug: Bug): void{
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      Swal.fire('Error seleccionar imagen :', 'El archivo debe ser una imagen', 'error');
+      this.fotoSeleccionada = null;
+    }
+  }
+
+  subirFoto(id: number) {
+    if (!this.fotoSeleccionada) {
+      Swal.fire('Error Upload:', 'Debe seleccionar una foto', 'error');
+    } else {
+      this.bugService.subirFoto(this.fotoSeleccionada, id)
+        .subscribe(event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progreso = Math.round((event.loaded / event.total) * 100);
+          } else if (event.type === HttpEventType.Response) {
+            const response: any = event.body;
+            this.bug = response.cliente as Bug;
+            Swal.fire({
+              title: 'Bug Created',
+              text: 'Your new bug was created',
+              icon: 'success',
+              confirmButtonText: 'Ok!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.value) {
+                this.router.navigate([`/detallebug/${id}`]);
+              }
+            });
+          }
+        });
+    }
+  }
+
+  createNotification(bug: Bug): void {
     const notification: BugNotification = new BugNotification();
 
     notification.description = `The user ${this.authService.usuario.nombre} ${this.authService.usuario.apellido} opened the bug: ${bug.title}. On ${new Date().toDateString()}`;

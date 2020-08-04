@@ -5,10 +5,10 @@ import { BugService } from 'src/app/shared/services/bug.service';
 import { Bugcomentario } from 'src/app/shared/models/bugcomentario';
 import { BugcomentarioService } from 'src/app/shared/services/bugcomentario.service';
 import Swal from 'sweetalert2';
-import { catchError } from 'rxjs/operators';
 import { BugNotification } from 'src/app/shared/models/bugnotification';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SignupService } from '../../services/signup.service';
 
 @Component({
   selector: 'app-bugdetalle',
@@ -52,8 +52,8 @@ export class BugdetalleComponent implements OnInit {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#d33',
+      cancelButtonColor:  '#3085d6',
       confirmButtonText: 'Yes, close it!'
     }).then((result) => {
       if (result.value) {
@@ -111,5 +111,4 @@ export class BugdetalleComponent implements OnInit {
 
     this.notificationService.newNotification(notification).subscribe();
   }
-
 }

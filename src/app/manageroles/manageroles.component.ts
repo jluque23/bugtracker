@@ -19,6 +19,7 @@ export class ManagerolesComponent implements OnInit {
   usuariosTotal = 0;
   usuariosAdmin = 0;
   usuariosGeneral = 0;
+  searchText;
 
   constructor(private modalService: ModalService,
               private signupService: SignupService,
@@ -85,5 +86,9 @@ export class ManagerolesComponent implements OnInit {
         this.abrirModal(usuario);
       }
     });
+  }
+
+  search(term: string) {
+
   }
 }

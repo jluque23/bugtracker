@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/helpers/header/header.component';
 import { FooterComponent } from './shared/helpers/footer/footer.component';
@@ -75,7 +77,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
     BrowserAnimationsModule,
-    ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule
+    ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule,
+    Ng2SearchPipeModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
