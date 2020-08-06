@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clientes-app": {
+    "bugexterminator": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/clientes-app",
+            "outputPath": "dist/bugexterminator",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
@@ -63,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "clientes-app:build"
+            "browserTarget": "bugexterminator:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "clientes-app:build:production"
+              "browserTarget": "bugexterminator:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "clientes-app:build"
+            "browserTarget": "bugexterminator:build"
           }
         },
         "test": {
@@ -113,18 +114,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "clientes-app:serve"
+            "devServerTarget": "bugexterminator:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "clientes-app:serve:production"
+              "devServerTarget": "bugexterminator:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "clientes-app",
+  "defaultProject": "bugexterminator",
   "cli": {
     "analytics": false
   }

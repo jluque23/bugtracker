@@ -12,6 +12,10 @@ export class DashboardComponent implements OnInit {
   totalBugs = 0;
   solvedBugs = 0;
   activeBugs = 0;
+  searchText;
+  page = 1;
+  pageSize = 4;
+  collectionSize = this.totalBugs;
 
   constructor(private bugService: BugService) { }
 
@@ -24,15 +28,22 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  numeroBugsSolved(bugs: Bug[]){
+  numeroBugsSolved(bugs: Bug[]) {
     bugs.forEach(bug => {
-      if (bug.enabled === false){
+      if (bug.enabled === false) {
         this.solvedBugs++;
-      }else {
+      } else {
         this.activeBugs++;
       }
     });
     return this.solvedBugs;
   }
 
+  solvedOrNot(bool) {
+    if (bool === true) {
+      return 'Not Solved';
+    } else {
+      return 'Solved';
+    }
+  }
 }

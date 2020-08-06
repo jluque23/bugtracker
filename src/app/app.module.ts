@@ -34,6 +34,7 @@ import { NewbugComponent } from './openedbugs/newbug/newbug.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { BugdetalleComponent } from './shared/helpers/bugdetalle/bugdetalle.component';
 import { BugexterminatorComponent } from './bugexterminator/bugexterminator.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: '', redirectTo: '/bugexterminator', pathMatch: 'full' },
@@ -78,7 +79,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
     BrowserAnimationsModule,
     ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgbModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

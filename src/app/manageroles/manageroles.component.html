@@ -1,75 +1,62 @@
-<h1 style=font-size:50px; class="display-1 mb-3">Role Manager Assignment <i class="fas fa-users"></i></h1>
+<h1 class="display-1 mb-3">Role Manager Assignment <i class="fas fa-users"></i></h1>
 
 <app-usermodal *ngIf="usuarioSeleccionado" [usuario]="usuarioSeleccionado"></app-usermodal>
-<!-- Cards -->
+
 <div class="row">
-    <div class="col-xl-4 col-md-6">
-        <div class="card mb-3">
-            <h3 class="card-header bg-dark text-white">Usuarios</h3>
-            <div class="card-body d-flex justify-content-between">
-                <p>{{usuariosTotal}}</p>
+    <div class="col-sm-4">
+        <div class="card border-primary mb-3">
+            <div class="card-body bg-light  d-flex justify-content-between">
+                <h3>Total Usuarios {{usuariosTotal}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-md-6">
-        <div class="card mb-3">
-            <h3 class="card-header bg-dark text-white">Desarrolladores</h3>
-            <div class="card-body d-flex align-items-center justify-content-between">
-                <p>{{usuariosAdmin}}</p>
+    <div class="col-sm-4">
+        <div class="card border-success mb-3">
+            <div class="card-body bg-light d-flex align-items-center justify-content-between">
+                <h3>Desarrolladores {{usuariosAdmin}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-md-6">
-        <div class="card mb-3">
-            <h3 class="card-header bg-dark text-white">Usuarios Generales</h3>
-            <div class="card-body d-flex align-items-center justify-content-between">
-                <p>{{usuariosGeneral}}</p>
+    <div class="col-sm-4">
+        <div class="card border-warning mb-3">
+            <div class="card-body bg-light d-flex align-items-center justify-content-between">
+                <h3>Usuario General {{usuariosGeneral}}</h3>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Table -->
-<div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1">
-            Manage Roles Assignment
-        </i>
-    </div>
-    <div class="card-body">
-        
-        <div class="input mb-3">
-            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search User">
-        </div>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th *ngIf="authService.hasRole('ROLE_USER')">Imagen</th>
-                        <th>Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Date Created</th>
-                        <th>Role</th>
-                        <th *ngIf="authService.hasRole('ROLE_ADMIN')">Edit Roles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let usuario of usuarios | filter:searchText">
-                        <td *ngIf="authService.hasRole('ROLE_USER')"><img *ngIf="usuario?.foto" src="http://localhost:8080/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded-circle"
-                            style="width: 84px; height: 84px;">
-                            <img *ngIf="!usuario?.foto" src="http://localhost:8080/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded-circle"
-                            style="width: 84px; height: 84px;"></td>
-                        <td>{{usuario.nombre}}</td>
-                        <td>{{usuario.apellido}}</td>
-                        <td>{{usuario.email}}</td>
-                        <td>{{usuario.createAt}}</td>
-                        <td>{{usuario.roles[0] | json}}</td>
-                        <td><button type="button" (click)="makeAdmin(usuario)" class="btn btn-danger btn-sm" *ngIf="authService.hasRole('ROLE_ADMIN')">Make admin</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="input mb-3">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search User">
 </div>
+
+<div class="table-responsive rounded ">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th *ngIf="authService.hasRole('ROLE_USER')">Imagen</th>
+                <th>Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Date Created</th>
+                <th>Role</th>
+                <th *ngIf="authService.hasRole('ROLE_ADMIN')">Edit Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios | filter:searchText">
+                <td *ngIf="authService.hasRole('ROLE_USER')">
+                    <img *ngIf="usuario?.foto" src="{{urlBackend}}/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded" style="width: 84px;">
+                    <img *ngIf="!usuario?.foto" src="{{urlBackend}}/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded" style="width: 84px;">
+                </td>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.createAt}}</td>
+                <td>{{usuario.roles[0] | json}}</td>
+                <td><button type="button" (click)="makeAdmin(usuario)" class="btn btn-danger btn-sm" *ngIf="authService.hasRole('ROLE_ADMIN')">Make admin</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

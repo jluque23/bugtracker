@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Bugcomentario } from '../models/bugcomentario';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BugcomentarioService {
 
-  private urlEndPoint = 'http://localhost:8080/api/comentariosbug';
+  private urlEndPoint = `${URL_BACKEND}/api/comentariosbug`;
+  // private urlEndPoint = 'http://localhost:8080/api/comentariosbug';
 
   constructor(private http: HttpClient) { }
 

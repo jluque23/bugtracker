@@ -3,13 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { BugNotification } from '../models/bugnotification';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  private urlEndPoint = 'http://localhost:8080/api/notifications';
+  private urlEndPoint = `${URL_BACKEND}/api/notifications`;
+  // private urlEndPoint = 'http://localhost:8080/api/notifications';
 
   constructor(private http: HttpClient) { }
 

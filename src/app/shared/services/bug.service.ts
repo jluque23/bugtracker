@@ -5,12 +5,15 @@ import { Observable, throwError } from 'rxjs';
 import { Bug } from '../models/bug';
 import { map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BugService {
-  private urlEndPoint = 'http://localhost:8080/api/bugs';
+
+  private urlEndPoint = `${URL_BACKEND}/api/bugs`;
+  // private urlEndPoint = 'http://localhost:8080/api/bugs';
 
   constructor(private http: HttpClient, private router: Router) { }
 

@@ -10,10 +10,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent {
 
-  constructor(public authService:AuthService, private router: Router) { }
+  public isMenuCollapsed = true;
 
-  logout():void{
-    Swal.fire('Logout',`Hola ${this.authService.usuario.username}, has cerrado sesion con exito!`,'success');
+  constructor(public authService: AuthService, private router: Router) { }
+
+  logout(): void {
+    Swal.fire('Logout', `Hola ${this.authService.usuario.username}, has cerrado sesion con exito!`, 'success');
     this.authService.logout();
     this.router.navigate(['/login']);
   }

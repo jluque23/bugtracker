@@ -1,14 +1,18 @@
  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" routerLink='/bugexterminator'><i class="fas fa-bug"></i> Bug ExTerminator</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ 
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
+  </button> -->
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink='/dashboard' *ngIf="authService.hasRole('ROLE_ADMIN')">Dashboard<i class="fas fa-tachometer-alt ml-1 fa-lg"></i></a>  
+        <a class="nav-link" routerLink='/dashboard' *ngIf="authService.hasRole('ROLE_ADMIN')" (click)="isMenuCollapsed = true">Dashboard<i class="fas fa-tachometer-alt ml-1 fa-lg"></i></a>  
       </li>
 
 
@@ -17,17 +21,17 @@
           Bug Tracker <i class="fas fa-bug ml-1"></i>
         </li>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" routerLink='/openedbugs'>Unsolved bugs<i class="fas fa-wrench ml-1 fa-lg"></i></a>  
-          <a class="dropdown-item" routerLink='/closedbugs'>Solved bugs<i class="far fa-check-square ml-1 fa-lg"></i></a>  
+          <a class="dropdown-item" routerLink='/openedbugs' (click)="isMenuCollapsed = true">Unsolved bugs<i class="fas fa-wrench ml-1 fa-lg"></i></a>  
+          <a class="dropdown-item" routerLink='/closedbugs' (click)="isMenuCollapsed = true">Solved bugs<i class="far fa-check-square ml-1 fa-lg"></i></a>  
         </div>
       </div>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink='/notifications' *ngIf="authService.hasRole('ROLE_ADMIN')">Notifications<i class="far fa-bell ml-1 fa-lg"></i></a>  
+        <a class="nav-link" routerLink='/notifications' *ngIf="authService.hasRole('ROLE_ADMIN')" (click)="isMenuCollapsed = true">Notifications<i class="far fa-bell ml-1 fa-lg"></i></a>  
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink='/manageroles' *ngIf="authService.hasRole('ROLE_ADMIN')">Role Manager<i class="fas fa-users ml-1 fa-lg"></i></a>  
+        <a class="nav-link" routerLink='/manageroles' *ngIf="authService.hasRole('ROLE_ADMIN')" (click)="isMenuCollapsed = true">Role Manager<i class="fas fa-users ml-1 fa-lg"></i></a>  
       </li>
       
     </ul>
@@ -41,8 +45,8 @@
         </a>
       
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <button [routerLink]="['/settings']" class="dropdown-item" type="submit">Settings</button>
-          <button (click)='logout()' class="dropdown-item" type="submit">Sign out</button>
+          <button [routerLink]="['/settings']" class="dropdown-item" type="submit" (click)="isMenuCollapsed = true">Settings</button>
+          <button (click)='logout()' class="dropdown-item" type="submit" (click)="isMenuCollapsed = true">Sign out</button>
         </div>
       </li>
     </ul>

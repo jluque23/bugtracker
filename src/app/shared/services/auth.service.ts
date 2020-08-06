@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../models/usuario';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,8 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndpoint = 'http://localhost:8080/oauth/token';
+    const urlEndPoint = `${URL_BACKEND}/oauth/token`;
+    // const urlEndpoint = 'http://localhost:8080/oauth/token';
 
     const credenciales = btoa('angularapp' + ':' + '12345');
 
@@ -57,7 +59,7 @@ export class AuthService {
     params.set('username', usuario.username);
     params.set('password', usuario.password);
 
-    return this.http.post<any>(urlEndpoint, params.toString(), { headers: httpHeaders });
+    return this.http.post<any>(urlEndPoint, params.toString(), { headers: httpHeaders });
   }
 
   guardarUsuario(accessToken: string): void {

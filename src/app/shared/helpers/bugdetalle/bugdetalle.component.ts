@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { BugNotification } from 'src/app/shared/models/bugnotification';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { SignupService } from '../../services/signup.service';
+import { URL_BACKEND } from '../../config/config';
 
 @Component({
   selector: 'app-bugdetalle',
@@ -20,6 +20,7 @@ export class BugdetalleComponent implements OnInit {
   public bug: Bug = new Bug();
   public comentarios: Bugcomentario[] = [];
   public bugComentario: Bugcomentario = new Bugcomentario();
+  urlBackend = URL_BACKEND;
 
   constructor(private activatedRoute: ActivatedRoute,
               private bugService: BugService,

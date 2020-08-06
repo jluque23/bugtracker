@@ -5,6 +5,7 @@ import { SignupService } from '../shared/services/signup.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../shared/services/auth.service';
+import { URL_BACKEND } from '../shared/config/config';
 
 @Component({
   selector: 'app-manageroles',
@@ -20,6 +21,7 @@ export class ManagerolesComponent implements OnInit {
   usuariosAdmin = 0;
   usuariosGeneral = 0;
   searchText;
+  urlBackend = URL_BACKEND;
 
   constructor(private modalService: ModalService,
               private signupService: SignupService,
@@ -88,7 +90,4 @@ export class ManagerolesComponent implements OnInit {
     });
   }
 
-  search(term: string) {
-
-  }
 }

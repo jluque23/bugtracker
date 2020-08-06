@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { SignupService } from 'src/app/shared/services/signup.service';
 import Swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
+import { URL_BACKEND } from 'src/app/shared/config/config';
 
 @Component({
   selector: 'app-account',
@@ -14,6 +15,7 @@ export class AccountComponent implements OnInit {
   usuario: Usuario = new Usuario();
   fotoSeleccionada: File;
   progreso = 0;
+  urlBackend = URL_BACKEND;
 
   username = this.authService.usuario.username;
 

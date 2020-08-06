@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { Observable, throwError, Subject } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { catchError, map } from 'rxjs/operators';
+import { URL_BACKEND } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
-  private urlEndPoint = 'http://localhost:8080/api/usuarios';
-  private searchTerm = new Subject<string>();
+
+  private urlEndPoint = `${URL_BACKEND}/api/usuarios`;
+  // private urlEndPoint = 'http://localhost:8080/api/usuarios';
 
   constructor(private http: HttpClient, private router: Router) { }
 
