@@ -1,8 +1,7 @@
-<div class="jumbotron jumbotron-fluid text-white bg-info rounded">
+<h1 style=font-size:50px;>Notifications<i class="far fa-bell ml-1"></i></h1>
+<div class="jumbotron jumbotron-fluid text-white bg-dark rounded">
     <div class="container">
-    <h1 style=font-size:50px;>Notifications<i class="far fa-bell ml-1"></i></h1>
-      <hr class="my-4">
-      <div class="alert alert-info" role="alert" *ngFor="let notification of notifications">
+      <div class="alert alert-dark" role="alert" *ngFor="let notification of notifications">
           <li>{{notification.description}}</li>
       </div>
     </div>

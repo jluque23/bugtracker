@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { Bug } from '../models/bug';
 import { map, catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,11 @@ export class BugService {
     return this.http.get<Bug>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if (e.status !== 401 && e.error.mensaje) {
-          this.router.navigate(['/openedbugs']);
+          Swal.fire('Inexistent Bug!', `${e.error.mensaje}!`, 'error').then((result) => {
+            if (result.value) {
+              this.router.navigate(['/openedbugs']);
+            }
+          });
           console.error(e.error.mensaje);
         }
         return throwError(e);
@@ -75,8 +80,6 @@ export class BugService {
 
   subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
     const formData = new FormData();
-
-    console.log(formData);
     formData.append("archivo", archivo);
     formData.append("id", id);
 

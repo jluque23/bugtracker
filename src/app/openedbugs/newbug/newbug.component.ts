@@ -64,8 +64,6 @@ export class NewbugComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
             this.progreso = Math.round((event.loaded / event.total) * 100);
           } else if (event.type === HttpEventType.Response) {
-            const response: any = event.body;
-            this.bug = response.cliente as Bug;
             Swal.fire({
               title: 'Bug Created',
               text: 'Your new bug was created',

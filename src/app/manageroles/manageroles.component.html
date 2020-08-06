@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-xl-4 col-md-6">
         <div class="card mb-3">
-            <h3 class="card-header bg-primary">Usuarios</h3>
+            <h3 class="card-header bg-dark text-white">Usuarios</h3>
             <div class="card-body d-flex justify-content-between">
                 <p>{{usuariosTotal}}</p>
             </div>
@@ -13,7 +13,7 @@
     </div>
     <div class="col-xl-4 col-md-6">
         <div class="card mb-3">
-            <h3 class="card-header bg-success">Desarrolladores</h3>
+            <h3 class="card-header bg-dark text-white">Desarrolladores</h3>
             <div class="card-body d-flex align-items-center justify-content-between">
                 <p>{{usuariosAdmin}}</p>
             </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-xl-4 col-md-6">
         <div class="card mb-3">
-            <h3 class="card-header bg-secondary">Usuarios Generales</h3>
+            <h3 class="card-header bg-dark text-white">Usuarios Generales</h3>
             <div class="card-body d-flex align-items-center justify-content-between">
                 <p>{{usuariosGeneral}}</p>
             </div>
@@ -57,10 +57,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let usuario of usuarios | filter:searchText">
-                        <td *ngIf="authService.hasRole('ROLE_USER')"><img *ngIf="usuario?.foto" src="http://localhost:8080/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded"
-                            style="width: 84px;">
-                            <img *ngIf="!usuario?.foto" src="http://localhost:8080/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded"
-                            style="width: 84px;"></td>
+                        <td *ngIf="authService.hasRole('ROLE_USER')"><img *ngIf="usuario?.foto" src="http://localhost:8080/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded-circle"
+                            style="width: 84px; height: 84px;">
+                            <img *ngIf="!usuario?.foto" src="http://localhost:8080/images/no-image.png" alt="Sin foto" class="img-thumbnail rounded-circle"
+                            style="width: 84px; height: 84px;"></td>
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.apellido}}</td>
                         <td>{{usuario.email}}</td>

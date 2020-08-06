@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/models/usuario';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -27,11 +28,15 @@ export class LoginComponent implements OnInit {
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
       const usuario = this.authService.usuario;
-      this.router.navigate(['/bugexterminator']);
+
       Swal.fire('Login', `Hola ${usuario.username}, has iniciado sesion con exito`, 'success');
-      this.router.navigate(['/dashboard']);
+      if (this.authService.hasRole("ROLE_ADMIN")){
+        this.router.navigate(['/dashboard']);
+      }else {
+        this.router.navigate(['/bugexterminator']);
+      }
     }, err => {
-      if (err.status == 400) {
+      if (err.status === 400) {
         Swal.fire('Login', 'Usuario o clave incorrectas!', 'error');
       }
     });
