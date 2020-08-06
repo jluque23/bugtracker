@@ -17,7 +17,7 @@ export class NewbugComponent implements OnInit {
 
   public bug: Bug = new Bug();
   public usuarioOriginal = this.authService.usuario;
-  fotoSeleccionada: File;
+  // fotoSeleccionada: File;
   progreso = 0;
 
   constructor(private router: Router,
@@ -34,64 +34,64 @@ export class NewbugComponent implements OnInit {
       this.bug.usuario = this.authService.usuarioId;
     }
 
-    if (this.fotoSeleccionada == null) {
-      Swal.fire('Photo', `You must upload a photo`, 'warning');
-    } else {
-      this.bugService.createBug(this.bug).subscribe(
-        json => {
-          this.createNotification(this.bug);
+    // if (this.fotoSeleccionada == null) {
+    //   Swal.fire('Photo', `You must upload a photo`, 'warning');
+    // } else {
+    this.bugService.createBug(this.bug).subscribe(
+      json => {
+        this.createNotification(this.bug);
 
-          Swal.fire({
-            title: 'Bug Created',
-            text: 'Your new bug was created',
-            icon: 'success',
-            confirmButtonText: 'Ok!',
-            reverseButtons: true
-          }).then((result) => {
-            if (result.value) {
-              this.router.navigate([`/detallebug/${json.id}`]);
-            }
-          });
-
-          // this.subirFoto(json.id);
-        }
-      );
-    }
-  }
-
-  seleccionarFoto(event) {
-    this.fotoSeleccionada = event.target.files[0];
-
-    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
-      Swal.fire('Error seleccionar imagen :', 'El archivo debe ser una imagen', 'error');
-      this.fotoSeleccionada = null;
-    }
-  }
-
-  subirFoto(id: number) {
-    if (!this.fotoSeleccionada) {
-      Swal.fire('Error Upload:', 'Debe seleccionar una foto', 'error');
-    } else {
-      this.bugService.subirFoto(this.fotoSeleccionada, id)
-        .subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.progreso = Math.round((event.loaded / event.total) * 100);
-          } else if (event.type === HttpEventType.Response) {
-            Swal.fire({
-              title: 'Bug Created',
-              text: 'Your new bug was created',
-              icon: 'success',
-              confirmButtonText: 'Ok!',
-              reverseButtons: true
-            }).then((result) => {
-              if (result.value) {
-                this.router.navigate([`/detallebug/${id}`]);
-              }
-            });
+        Swal.fire({
+          title: 'Bug Created',
+          text: 'Your new bug was created',
+          icon: 'success',
+          confirmButtonText: 'Ok!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate([`/detallebug/${json.id}`]);
           }
         });
-    }
+
+        // this.subirFoto(json.id);
+      }
+    );
+    // }
   }
+
+  // seleccionarFoto(event) {
+  //   this.fotoSeleccionada = event.target.files[0];
+
+  //   if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+  //     Swal.fire('Error seleccionar imagen :', 'El archivo debe ser una imagen', 'error');
+  //     this.fotoSeleccionada = null;
+  //   }
+  // }
+
+  // subirFoto(id: number) {
+  //   if (!this.fotoSeleccionada) {
+  //     Swal.fire('Error Upload:', 'Debe seleccionar una foto', 'error');
+  //   } else {
+  //     this.bugService.subirFoto(this.fotoSeleccionada, id)
+  //       .subscribe(event => {
+  //         if (event.type === HttpEventType.UploadProgress) {
+  //           this.progreso = Math.round((event.loaded / event.total) * 100);
+  //         } else if (event.type === HttpEventType.Response) {
+  //           Swal.fire({
+  //             title: 'Bug Created',
+  //             text: 'Your new bug was created',
+  //             icon: 'success',
+  //             confirmButtonText: 'Ok!',
+  //             reverseButtons: true
+  //           }).then((result) => {
+  //             if (result.value) {
+  //               this.router.navigate([`/detallebug/${id}`]);
+  //             }
+  //           });
+  //         }
+  //       });
+  //   }
+  // }
 
   createNotification(bug: Bug): void {
     const notification: BugNotification = new BugNotification();

@@ -17,11 +17,11 @@
                 <textarea type="text" style="height: 100px;" class="form-control" [(ngModel)]="bug.descripcion" name="descripcion" required minlength="4" #descripcion="ngModel" placeholder="Type a description to the bug"></textarea>
             </div>
 
-            <div class="custom-file mb-3">
+            <!-- <div class="custom-file mb-3">
                 <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input"
                     id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" required>
                 <label class="custom-file-label" for="inputGroupFile04">Select an image</label>
-            </div>
+            </div> -->
 
             <button class="btn btn-primary" (click)="newBug()" [disabled]="!newbugForm.form.valid">Submit</button>
         </form>
