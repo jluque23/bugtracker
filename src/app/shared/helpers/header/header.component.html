@@ -37,7 +37,7 @@
     </ul>
     
     <ul class="navbar-nav navbar-right">
-      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-light">Sign in</a></li>
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-light" (click)="isMenuCollapsed = true">Sign in</a></li>
 
       <li *ngIf="authService.isAuthenticated()" class="dropdown">
         <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
