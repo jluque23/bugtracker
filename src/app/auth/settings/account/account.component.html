@@ -1,7 +1,26 @@
 <div class="container-fluid">
   <h1 class="mt-4">Account</h1>
   <div class="row">
-    <div class="col-lg-8">
+    <!-- <div class="col-lg-4 mb-3">
+        <div>
+            <div>
+                <img *ngIf="usuario?.foto" src="{{urlBackend}}/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded">
+            </div>
+        </div>
+        <div class="input-group mt-3">
+            <div class="custom-file">
+                <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input"
+                    id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                <label class="custom-file-label" for="inputGroupFile04">Select an image</label>
+            </div>
+            <div class="input-group-append">
+                <button (click)="subirFoto()" [disabled]="!fotoSeleccionada"
+                    class="btn btn-primary" type="button"
+                    id="inputGroupFileAddon04">Upload</button>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-sm-8 mb-3">
         <form #accountForm="ngForm">
             <div class="form-group">
                 <label for="nombre">Name</label>
@@ -28,25 +47,6 @@
             </div>
     
         </form>
-    </div>
-    <div class="col-lg-4">
-        <div>
-            <div >
-                <img *ngIf="usuario?.foto" src="{{urlBackend}}/api/uploads/img/{{usuario.foto}}" class="img-thumbnail rounded">
-            </div>
-        </div>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input"
-                    id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                <label class="custom-file-label" for="inputGroupFile04">Select an image</label>
-            </div>
-            <div class="input-group-append">
-                <button (click)="subirFoto()" [disabled]="!fotoSeleccionada"
-                    class="btn btn-primary" type="button"
-                    id="inputGroupFileAddon04">Upload</button>
-            </div>
-        </div>
     </div>
 </div>
 

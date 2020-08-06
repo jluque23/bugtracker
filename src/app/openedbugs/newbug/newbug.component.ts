@@ -40,7 +40,20 @@ export class NewbugComponent implements OnInit {
       this.bugService.createBug(this.bug).subscribe(
         json => {
           this.createNotification(this.bug);
-          this.subirFoto(json.id);
+
+          Swal.fire({
+            title: 'Bug Created',
+            text: 'Your new bug was created',
+            icon: 'success',
+            confirmButtonText: 'Ok!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+              this.router.navigate([`/detallebug/${json.id}`]);
+            }
+          });
+
+          // this.subirFoto(json.id);
         }
       );
     }
