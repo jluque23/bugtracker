@@ -75,7 +75,7 @@ export class BugdetalleComponent implements OnInit {
   }
 
   newBugComentario(): void {
-    this.bugComentario.usuario = `${this.bug.usuario.nombre} ${this.bug.usuario.apellido}`;
+    this.bugComentario.usuario = `${this.authService.usuario.nombre} ${this.authService.usuario.apellido}`;
     this.bugComentario.bug = this.bug;
 
     this.bugComentarioService.newComentarioBug(this.bugComentario).subscribe(

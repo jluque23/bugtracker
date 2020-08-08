@@ -6,21 +6,21 @@
     <div class="col-sm-4">
         <div class="card border-primary mb-3">
             <div class="card-body bg-light  d-flex justify-content-between">
-                <h3>Total Usuarios {{usuariosTotal}}</h3>
+                <h3>Total Users {{usuariosTotal}}</h3>
             </div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="card border-success mb-3">
             <div class="card-body bg-light d-flex align-items-center justify-content-between">
-                <h3>Desarrolladores {{usuariosAdmin}}</h3>
+                <h3>Developers {{usuariosAdmin}}</h3>
             </div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="card border-warning mb-3">
             <div class="card-body bg-light d-flex align-items-center justify-content-between">
-                <h3>Usuario General {{usuariosGeneral}}</h3>
+                <h3>General Users {{usuariosGeneral}}</h3>
             </div>
         </div>
     </div>
@@ -53,8 +53,8 @@
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.email}}</td>
                 <td>{{usuario.createAt}}</td>
-                <td>{{usuario.roles[0] | json}}</td>
-                <td><button type="button" (click)="makeAdmin(usuario)" class="btn btn-danger btn-sm" *ngIf="authService.hasRole('ROLE_ADMIN')">Make admin</button></td>
+                <td>{{changeRole(usuario.roles)}}</td>
+                <td><button type="button" (click)="makeAdmin(usuario)" class="btn btn-danger btn-sm" *ngIf="authService.hasRole('ROLE_ADMIN') && !verifyRoles(usuario.roles)">Make Developer</button></td>
             </tr>
         </tbody>
     </table>

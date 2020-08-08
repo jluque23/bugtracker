@@ -5,6 +5,7 @@ import { Observable, throwError, Subject } from 'rxjs';
 import { Usuario } from '../models/usuario';
 import { catchError, map } from 'rxjs/operators';
 import { URL_BACKEND } from '../config/config';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'

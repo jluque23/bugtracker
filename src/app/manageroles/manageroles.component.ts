@@ -82,7 +82,7 @@ export class ManagerolesComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, make this user an admin!'
+      confirmButtonText: 'Yes, make this user a Developer!'
     }).then((result) => {
       if (result.value) {
         this.abrirModal(usuario);
@@ -90,4 +90,18 @@ export class ManagerolesComponent implements OnInit {
     });
   }
 
+  changeRole(roles: string[]){
+    if (roles.some( usuario => usuario['nombre'] === 'ROLE_ADMIN')){
+      return 'DEVELOPER';
+    }
+    if (roles.some( usuario => usuario['nombre'] === 'ROLE_USER')){
+      return 'GENERAL USER';
+    }
+  }
+
+  verifyRoles(roles: string[]){
+    if (roles.some( usuario => usuario['nombre'] === 'ROLE_ADMIN')){
+      return true;
+    }
+  }
 }

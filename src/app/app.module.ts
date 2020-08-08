@@ -35,6 +35,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { BugdetalleComponent } from './shared/helpers/bugdetalle/bugdetalle.component';
 import { BugexterminatorComponent } from './bugexterminator/bugexterminator.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SpinnerComponent } from './shared/helpers/spinner/spinner.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/bugexterminator', pathMatch: 'full' },
@@ -69,7 +71,8 @@ const routes: Routes = [
     NewbugComponent,
     BugdetalleComponent,
     NotificationsComponent,
-    BugexterminatorComponent
+    BugexterminatorComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ReactiveFormsModule, MatAutocompleteModule, MatInputModule, MatFormFieldModule,
     Ng2SearchPipeModule,
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

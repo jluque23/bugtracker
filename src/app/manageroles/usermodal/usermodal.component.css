@@ -8,6 +8,13 @@
     z-index: 1000;
 }
 
+.modal{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
 .animacion{
     animation-duration: 1s;
     animation-fill-mode: both;

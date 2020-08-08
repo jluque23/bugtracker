@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/models/usuario';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
   titulo = 'Sign In';
   usuario: Usuario;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private spinner: NgxSpinnerService) {
     this.usuario = new Usuario();
   }
 
@@ -24,12 +26,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
+
     this.authService.login(this.usuario).subscribe(response => {
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
       const usuario = this.authService.usuario;
 
       Swal.fire('Login', `Hola ${usuario.username}, has iniciado sesion con exito`, 'success');
+      this.spinner.hide();
       if (this.authService.hasRole("ROLE_ADMIN")){
         this.router.navigate(['/dashboard']);
       }else {
@@ -38,8 +43,10 @@ export class LoginComponent implements OnInit {
     }, err => {
       if (err.status === 400) {
         Swal.fire('Login', 'Usuario o clave incorrectas!', 'error');
+        this.spinner.hide();
       }
     });
+
   }
 
   ngOnInit(): void {

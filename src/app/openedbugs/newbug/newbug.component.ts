@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { BugNotification } from 'src/app/shared/models/bugnotification';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { HttpEventType } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-newbug',
@@ -23,13 +24,16 @@ export class NewbugComponent implements OnInit {
   constructor(private router: Router,
               public bugService: BugService,
               private authService: AuthService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
 
   }
 
   newBug(): void {
+    this.spinner.show();
+
     if (this.bug.usuario == null) {
       this.bug.usuario = this.authService.usuarioId;
     }
@@ -40,7 +44,7 @@ export class NewbugComponent implements OnInit {
     this.bugService.createBug(this.bug).subscribe(
       json => {
         this.createNotification(this.bug);
-
+        this.spinner.hide();
         Swal.fire({
           title: 'Bug Created',
           text: 'Your new bug was created',
@@ -54,6 +58,11 @@ export class NewbugComponent implements OnInit {
         });
 
         // this.subirFoto(json.id);
+      }, err => {
+        if (err.status != null) {
+          Swal.fire('Sign Up', 'Verificar datos Email y/o Usuario!', 'error');
+          this.spinner.hide();
+        }
       }
     );
     // }

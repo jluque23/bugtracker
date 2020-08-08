@@ -38,7 +38,7 @@ export class UsermodalComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, make this user an admin!'
+      confirmButtonText: 'Yes, make this user a Developer!'
     }).then((result) => {
       if (result.value) {
         this.usuarioService.makeUserAdmin(this.usuario).subscribe(
